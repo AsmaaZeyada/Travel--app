@@ -1,0 +1,50 @@
+@import "app/styles/colors";
+
+img {
+  width: 100%;
+}
+
+.jumbotron {
+  .container {
+    .display-3,
+    .display-4,
+    .lead {
+      color: white;
+    }
+  }
+}
+
+.btn-info {
+  background-color: $highlight-light;
+  border-color: $secondary-dark;
+}
+
+.btn-info:hover {
+  background-color: $highlight-dark;
+  border-color: $highlight-dark;
+}
+
+.btn-outline-info {
+  border-color: $highlight-light;
+  color: $highlight-light;
+  border: 1px solid $highlight-light;
+}
+
+.btn-outline-info:active,
+.btn-outline-info:hover {
+  background-color: $highlight-light;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled).active,
+.btn-outline-info:not(:disabled):not(.disabled):active,
+.show > .btn-outline-info.dropdown-toggle {
+  background-color: $highlight-light;
+}
+
+fa-icon {
+  color: $secondary-dark;
+}
+fa-icon:hover {
+  transition: 1s;
+  color: $highlight-light;
+}

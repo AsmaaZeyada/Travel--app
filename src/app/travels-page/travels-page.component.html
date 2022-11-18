@@ -1,0 +1,96 @@
+<div class="jumbotron jumbotron-fluid text-light">
+	<div class="container">
+		<br><br>
+		<h1 class="display-4">book your</h1>
+		<h1 class="display-3 ml-5">trip today</h1>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<p class="h2 font-italic font-weight-light">Find your dream vecation</p>
+			<p class="lead font-italic col-md-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+				cupiditate officia rem ducimus similique. Fugit quia voluptate delectus nesciunt vitae id doloremque
+				sunt! Error veniam dicta rem assumenda labore dolor!</p>
+		</div>
+	</div>
+
+	<div class="my-5">
+		<div class="row mb-3">
+			<div class="col text-right btn-sm">
+				<div class="btn-group btn-group-toggle btn-group-sm">
+					<button class="btn btn-outline-info" [class.active]="sortBy === 'name'" (click)="setSort('name')">
+						By Name</button>
+					<button class="btn btn-outline-info" [class.active]="sortBy === 'date'" (click)="setSort('date')">
+						By Date</button>
+					<button class="btn btn-outline-info" [class.active]="sortBy === 'price'" (click)="setSort('price')">
+						By Price</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="btn-group btn-group-toggle btn-group-sm col">
+				<button class="btn btn-outline-info rounded-0" [class.active]="filterBy === 'all'"
+					(click)="setFilter('all')">All</button>
+				<button *ngFor="let continent of continents" class="btn btn-outline-info"
+					[class.active]="filterBy === continent" (click)="setFilter(continent)">{{continent}}</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 mb-4 d-md-flex align-items-md-stretch mb-5"
+			*ngFor="let travelDestination of visibletDestinations">
+			<a [routerLink]="['/destinationDetail', travelDestination.destinationId]" routerLinkActive="router-link-active"
+				class="card-group">
+				<div class="card shadow-sm rounded-0">
+					<div class="card-image-wrapper">
+						<img src="{{travelDestination.image}}" class="card-img-top card-image rounded-0"
+							alt="{{travelDestination.destinationPlace}}, {{travelDestination.destinationCountry}} image">
+					</div>
+					<div class="card-body">
+						<h3 class="card-title">{{travelDestination.destinationPlace}},
+							<span>{{travelDestination.destinationCountry}}</span>
+						</h3>
+						<p class="lead font-weight-normal">{{travelDestination.duration | duration}}</p>
+						<div class="card-text">
+							<div [ngSwitch]="travelDestination.description | lowercase">
+								<div *ngSwitchCase="'all inclusive'">
+									<fa-icon [icon]="faStar" title="all inclusive" class="h4"></fa-icon> all inclusive
+								</div>
+								<div *ngSwitchCase="'transport included'">
+									<fa-icon [icon]="faPlane" title="transport included" class="h4"></fa-icon> transport
+									included
+								</div>
+								<div *ngSwitchCase="'breakfast, transport included'">
+									<fa-icon [icon]="faBreakfast" title="breakfast included" class="h4"></fa-icon>
+									breakfast included, <fa-icon [icon]="faPlane" title="transport included" class="h4">
+									</fa-icon> transport included
+								</div>
+
+								<div *ngSwitchDefault>{{travelDestination.description | lowercase}}</div>
+							</div>
+						</div>
+						<hr>
+
+						<p class="card-text">
+							<fa-icon [icon]="faCalender" title="Date" class="h4"></fa-icon>
+							{{travelDestination.startDate | date }} <br>
+						</p>
+						<p class="card-text">
+							<fa-icon [icon]="faClock" title="Time" class="h4 fa-icons-color"></fa-icon>
+							{{travelDestination.startDate | date : 'shortTime' }}
+						</p>
+
+					</div>
+					<div class="card-footer card-footer-custom d-flex justify-content-between">
+						<h4>Price: {{travelDestination.price | currency: travelDestination.currency }}</h4>
+						<button class="btn btn-info rounded-0" [routerLink]="['/destinationDetail', travelDestination.destinationId]">More
+							info</button>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
